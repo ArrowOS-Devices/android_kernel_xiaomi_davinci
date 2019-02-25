@@ -27,6 +27,9 @@
 #ifdef CONFIG_EXPOSURE_ADJUSTMENT
 #include "exposure_adjustment.h"
 #endif
+#ifdef CONFIG_KLAPSE
+#include "../sde/klapse.h"
+#endif
 
 /**
  * topology is currently defined by a set of following 3 values:
@@ -641,6 +644,10 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
 	}
 
 	dsi = &panel->mipi_device;
+	
+#ifdef CONFIG_KLAPSE
+	set_rgb_slider(bl_lvl);
+#endif
 
 	if (rc < 0)
 		pr_err("failed to update dcs backlight:%d\n", bl_temp);
