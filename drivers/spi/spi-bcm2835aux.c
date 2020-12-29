@@ -444,17 +444,12 @@ static int bcm2835aux_spi_probe(struct platform_device *pdev)
 
 	bs->clk = devm_clk_get(&pdev->dev, NULL);
 	if ((!bs->clk) || (IS_ERR(bs->clk))) {
-		err = PTR_ERR(bs->clk);
 		dev_err(&pdev->dev, "could not get clk: %d\n", err);
-<<<<<<< HEAD
 <<<<<<< HEAD
 		return err;
 =======
 		return PTR_ERR(bs->clk);
 >>>>>>> a3d4350cc849 (spi: bcm2835aux: Fix use-after-free on unbind)
-=======
-		return err;
->>>>>>> 6bc96c1bb209 (spi: bcm2835aux: Restore err assignment in bcm2835aux_spi_probe)
 	}
 
 	bs->irq = platform_get_irq(pdev, 0);
