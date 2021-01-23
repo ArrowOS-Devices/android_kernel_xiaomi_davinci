@@ -826,13 +826,6 @@ static __always_inline void old_rcu_barrier(void)
 #define COMPAT_CANNOT_DEPRECIATE_BH_RCU
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 10) && !defined(ISRHEL8)
-static inline void skb_mark_not_on_list(struct sk_buff *skb)
-{
-	skb->next = NULL;
-}
-#endif
-
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 20, 0) && !defined(ISRHEL8)
 #define NLA_POLICY_EXACT_LEN(_len) { .type = NLA_UNSPEC, .len = _len }
 #endif
@@ -863,14 +856,14 @@ static inline void skb_mark_not_on_list(struct sk_buff *skb)
 })
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
-#include <linux/skbuff.h>
-#ifndef skb_list_walk_safe
-#define skb_list_walk_safe(first, skb, next)                                   \
-	for ((skb) = (first), (next) = (skb) ? (skb)->next : NULL; (skb);      \
-	     (skb) = (next), (next) = (skb) ? (skb)->next : NULL)
-#endif
-#endif
+//#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
+//#include <linux/skbuff.h>
+//#ifndef skb_list_walk_safe
+//#define skb_list_walk_safe(first, skb, next)                                   \
+//	for ((skb) = (first), (next) = (skb) ? (skb)->next : NULL; (skb);      \
+//	     (skb) = (next), (next) = (skb) ? (skb)->next : NULL)
+//#endif
+//#endif
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)
 #define blake2s_init zinc_blake2s_init
